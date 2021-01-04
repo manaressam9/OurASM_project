@@ -1,4 +1,4 @@
-;saaaaalmmmmaaaaaa
+
 CODE SEGMENT
  PORTA  EQU 00H    ;Address of Port A = 00H
  PORTB  EQU 02H    ;Address of Port B= 02H
