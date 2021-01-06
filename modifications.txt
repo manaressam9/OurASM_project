@@ -1,0 +1,133 @@
+**manar**
+ "CALL FULLP "تحت ستارت هكتب 
+ CALL FULLP       ;if Al = 01H jumps to Full(Full clockwise mode) else compelte the code(goes to HALFCW)
+FULLP PROC
+ IN AL, PORTB   ;Copies value of port B to AL (the value of the 8 bits of portB)
+ CMP AL,01H     ; compares Al with 000000001B (which is the value results from logicstate)
+ JE FULL 
+ RET
+ FULLP ENDP
+**marowa**
+ "CALL HALFACWP" تحت هاف هتكتبى 
+ CALL HALFACWP      ;if Al = 01H jumps to HALFACW(HALF ANTI-clockwise mode) else compelte the code(goes to HALFCW)
+ FULLP فى اخر الكود بعد 
+HALFACWP PROC
+ IN AL, PORTC    ;Copies value of port C to AL (the value of the 8 bits of portC)
+ CMP AL,01H      ;compares Al with 000000001B (which is the value results from logicstate)
+ JE HALFACW
+ RET
+ HALFACWP ENDP
+**mariam**
+CALL FULLACWP  تحت فول هتكتبى
+ HALFACWP فى اخر الكود بعد 
+ FULLACWP PROC
+ IN AL, PORTC    ;Copies value of port C to AL (the value of the 8 bits of portC)
+ CMP AL,01H      ;compares Al with 000000001B (which is the value results from logicstate)
+ JE FULLACW      ;if Al = 01H jumps to FULLACW(FULL ANTI-clockwise mode) else compelte the code(goes to FULLCW)
+ RET
+ FULLACWP ENDP
+---------------
+**manar**
+ MODE1: 
+ MODE PROC
+ IN AL, PORTB   ;Copies value of port B to AL (the value of the 8 bits of portB)
+ CMP AL,01H     ; compares Al with 000000001B (which is the value results from logicstate)
+ JE FULL 
+ JMP HALF
+ MODE ENDP
+**marowa**
+1)
+ MODE1: 
+ MODE PROC
+ IN AL, PORTB   ;Copies value of port B to AL (the value of the 8 bits of portB)
+ MOV BL,AL       ;new value of BL التعديل اللى حصل ف الكود
+ CMP AL,01H     ; compares Al with 000000001B (which is the value results from logicstate)
+ JE FULL 
+ JMP HALF
+ MODE ENDP
+2)  
+PORTB_CHECK PROC
+ IN AL, PORTB
+ CMP BL, AL
+ JNE  MODE1
+ RET
+ PORTB_CHECK ENDP
+3)
+ START : تحت 
+ IN AL,PORTB اكتبى
+ MOV BL,AL
+**SALMA**
+و اعملى بيها كوميت و بعدين   CALL PORTB_CHECK اكتبى CALL DELAY فوق كل 
+ و اعملى بيها كوميتDELAY PROC شليها و حطيها ف اول   
+**manar**
+DIRECTION1:
+ DIRECTION PROC
+ MOV BL,AL
+ IN AL, PORTC
+ CMP BL, AL
+ JNE NOTEQUAL
+ JMP EQUAL 
+ NOTEQUAL:
+  CMP BL, 00H
+  JE HALFACW
+  JMP FULLCW
+ EQUAL:
+ CMP BL, 00H
+ JE HALFCW
+ JMP FULLACW
+ DIRECTION ENDP
+CODE ENDS
+END
+**mariam**
+1)
+DIRECTION1:
+ DIRECTION PROC
+ IN AL,PORTB التعديل
+ MOV BL,AL     التعديل
+ IN AL, PORTC  
+ MOV DL,AL      التعديل 
+ CMP BL, AL         التعديل 
+ JNE NOTEQUAL
+ JMP EQUAL 
+ NOTEQUAL:
+  CMP BL, 00H
+  JE HALFACW
+  JMP FULLCW
+ EQUAL:
+ CMP BL, 00H
+ JE HALFCW
+ JMP FULLACW
+ DIRECTION ENDP
+CODE ENDS
+END
+2)
+PORTB_CHECK PROC
+ IN AL, PORTB
+ CMP BL, AL
+ JNE  MODE1
+IN AL,PORTC
+  CMP DL,AL
+  JNE DIRECTION1
+ RET
+ PORTB_CHECK ENDP
+3) 
+START: تحت 
+IN AL, PORTC
+ MOV DL,AL
+**reem**
+1)
+حطى
+CALL MODE مكان CALL FULLP
+CALL DIRECTION مكان CALL HALFACW
+CALL DIRECTION مكان CALL FULLACW
+2)
+حطى 
+ IN AL, PORTB
+ CMP BL, AL
+ JNE  MODE1
+IN AL,PORTC
+  CMP DL,AL
+  JNE DIRECTION1
+CALL PORTB_CHECK مكان
+و شيلى 
+PORTB_CHECK PROC
