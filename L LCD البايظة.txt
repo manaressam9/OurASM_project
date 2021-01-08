@@ -1,0 +1,462 @@
+CODE SEGMENT
+ PORTA  EQU 00H    ;Address of Port A = 00H
+ PORTB  EQU 02H    ;Address of Port B= 02H
+ PORTC  EQU 04H    ;Address of Port C= 04H
+ CR EQU 06H    ;Address of Control register = 06H
+ORG 1000H         ;starts code at address 100H
+  
+   MOV AL, 10001011B ; means I/O device operates in I/O operatio mode and ports A,C are used as outputs port B as input with mode0
+  OUT CR, AL    ;outputs(copies) value of AL 80H=1000000B  to I/O port CR 
+  
+ 
+START:   ;THE MAIN CODE
+ IN AL,PORTC
+ MOV BL,AL
+ MOV CL,AL
+ CALL MODE       ;if Al = 01H jumps to Full(Full clockwise mode) else compelte the code(goes to HALFCW)
+HALF:     ;Half mode region
+IN AL,PORTC
+MOV CL,AL  ;cl=portB
+;MOV DL,1   ;DL=1
+ ;SHL DL,1  ;DL=00000010 to check direction
+ TEST CL,02H
+ JNZ HALFACW   ;if cl=00000010 go to half anticlockwise
+ JMP HALFCW    ;if cl=00000000 go to half clockwise
+HALFCW:  ;Half mode clockwise 8steps each step is 45ْ
+   
+   MOV AL, 00001000B  ;moves 08H to AL
+  OUT PORTA,AL        ;outputs(copies) value of AL 08H  to I/O port PORTA which means the coil A(for example) is set to 1 
+                      ;and the rest 3 coils set to 0
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY
+;--------------------
+  MOV AL, 00001100B
+  OUT PORTA,AL       ;outputs(copies) value of AL 0CH  to I/O port PORTA which means A,B coils (for example) is set to 1 
+                      ;and the rest 2 coils set to 0
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY
+;--------------------
+   MOV AL, 00000100B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY
+;--------------------
+  MOV AL, 00000110B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY   
+;--------------------
+ MOV AL, 00000010B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY  
+;--------------------
+  MOV AL, 00000011B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY 
+;--------------------
+  MOV AL, 00000001B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY  
+;--------------------
+  MOV AL, 00001001B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY  
+;--------------------
+JMP START
+HALFACW:    ;Half mode anti clockwise 
+MOV AL, 00001001B      
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY    
+;--------------------
+  MOV AL, 00000001B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY    
+;--------------------
+  MOV AL, 00000011B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY 
+;--------------------
+  MOV AL, 00000010B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+  CALL DELAY ;DELAY   
+;--------------------
+  MOV AL, 00000110B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY    
+;--------------------
+   MOV AL, 00000100B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY   
+;--------------------
+  MOV AL, 00001100B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY  
+;--------------------
+ MOV AL, 00001000B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY    
+;--------------------
+JMP START
+
+FULL: ;full mode clock wise
+
+ IN AL,PORTC
+MOV CL,AL     ;CL=PORTB
+ ;MOV DL,1     ;DL=1
+ ;SHL DL,1     ;DL=00000010
+ TEST CL,02H   
+ JNZ FULLACW  ;if cl=00000011 go to full anticlockwise
+ JMP FULLCW   ;if cl=00000001 go to full clockwise
+ FULLCW:     ;FULL mode clockwise 4steps each step is 90ْ
+MOV AL, 000000011B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY 
+;--------------------
+  MOV AL, 00001001B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY 
+;--------------------    
+  MOV AL, 00001100B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY 
+;--------------------    
+  MOV AL, 00000110B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY
+;--------------
+JMP START   
+;--------------------
+FULLACW:     ;full mode anticlock wise
+CALL FACWP
+MOV AL, 00000110B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY 
+;--------------------
+  MOV AL, 00001100B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+CALL DELAY ;DELAY 
+;--------------------    
+  MOV AL, 00001001B
+  OUT PORTA,AL
+;--------------------
+  CALL PRESS
+ CALL DELAY ;DELAY 
+;--------------------    
+  MOV AL, 00000011B
+  OUT PORTA,AL
+;--------------------
+CALL PRESS
+CALL DELAY ;DELAY 
+;-----------------
+JMP START
+;-----------------
+ 
+ DELAY PROC  ; DELAY PROCEDURE 
+    IN AL, PORTC
+    MOV CL,AL
+    AND CL,1CH
+    CMP CL, 00H   
+    JE  STOP
+    CMP CL, 04H   ;00000100 
+    JE  NORM
+    CMP CL, 08H ;00001000
+    JE MID
+    CMP CL,10H ;00010000
+    JE FAST
+    RET
+  DELAY ENDP
+ ;------
+  NORM:
+ NORMP PROC
+  MOV CX,0FFFFH
+  LOOPY: LOOP LOOPY
+  RET
+ NORMP ENDP
+;----------------- 
+ MID:
+ MIDP PROC
+  MOV CX,01FFFH
+  LOOPY: LOOP LOOPY
+  RET
+ MIDP ENDP
+;----------------- 
+
+ FAST:
+ FASTP PROC
+  MOV CX,01222H
+  LOOPY: LOOP LOOPY
+  RET
+ FASTP ENDP
+ ;--------------------
+ 
+ STOP:
+ STOPP PROC
+  MOV AL, 00H
+  OUT PORTA , AL
+  IN AL, PORTC
+  RET
+  STOPP ENDP
+  ;---------------
+  
+ PRESS PROC
+ IN AL, PORTC
+ CMP BL, AL
+ JNE  MODE1
+ RET
+ PRESS ENDP
+ ;-------------------------
+ 
+ MODE1: 
+ MODE PROC
+ IN AL, PORTC   ;Copies value of port B to AL (the value of the 8 bits of portB)
+ MOV BL,AL       ;new value of BL 
+ TEST BL,1
+ JNZ FULL 
+ JMP HALF
+ MODE ENDP
+ ;--------
+
+FACWP PROC   ;FULL ANTI-CLOCKWISE
+ MOV AL,00H  ;command setting cursor
+ OUT PORTA,AL    
+ MOV AL, 0EH 
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay0:loop Delay0
+ MOV AL,10H
+ OUT PORTA,AL 
+ MOV CX,00FFH; Delay 
+Delay1:loop Delay1
+    
+ MOV AL,00H  ;command setting 8 bit mode
+ OUT PORTA,AL    
+ MOV AL, 038H 
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay2:loop Delay2
+ MOV AL,10H
+ OUT PORTA,AL 
+ MOV CX,00FFH; Delay 
+Delay3:loop Delay3  
+
+  
+             
+             
+ MOV AL,00H  ;command setting 8 bit mode
+ OUT PORTA,AL                              
+ MOV AL,20H  ;command setting 8 bit mode
+ OUT PORTA,AL  
+ 
+ MOV AL,'F'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay4:loop Delay4
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay5:loop Delay5 
+           
+ MOV AL,20H
+ OUT PORTA,AL 
+                     
+  MOV AL,'U'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay6:loop Delay6
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay7:loop Delay7 
+           
+ MOV AL,20H
+ OUT PORTA,AL         
+ 
+  MOV AL,'L'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay8:loop Delay8
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay9:loop Delay9 
+           
+ MOV AL,20H
+ OUT PORTA,AL 
+
+ 
+ MOV AL,'L'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay10:loop Delay10
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay11:loop Delay11
+           
+ MOV AL,20H
+ OUT PORTA,AL  
+ 
+ MOV AL,'A'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay12:loop Delay12
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay13:loop Delay13 
+           
+ MOV AL,20H
+ OUT PORTA,AL   
+ 
+ MOV AL,'N'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay14:loop Delay14
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay15:loop Delay15 
+           
+ MOV AL,20H
+ OUT PORTA,AL  
+ 
+ MOV AL,'T'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay16:loop Delay16
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay17:loop Delay17 
+           
+ MOV AL,20H
+ OUT PORTA,AL  
+ 
+ MOV AL,'I'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay18:loop Delay18
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay19:loop Delay19 
+           
+ MOV AL,20H
+ OUT PORTA,AL  
+ 
+ MOV AL,'C'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay20:loop Delay20
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay21:loop Delay21 
+           
+ MOV AL,20H
+ OUT PORTA,AL    
+ 
+ MOV AL,'L'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay22:loop Delay22
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay23:loop Delay23 
+           
+ MOV AL,20H
+ OUT PORTA,AL    
+ 
+ MOV AL,'O'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay24:loop Delay24
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay25:loop Delay25 
+           
+ MOV AL,20H
+ OUT PORTA,AL     
+ 
+ MOV AL,'C'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay26:loop Delay26
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay27:loop Delay27 
+           
+ MOV AL,20H
+ OUT PORTA,AL   
+ 
+  MOV AL,'K'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay28:loop Delay28
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay29:loop Delay29
+           
+ MOV AL,20H
+ OUT PORTA,AL 
+ 
+ MOV AL,'W'
+ OUT PORTB,AL
+ MOV CX,00FFH; Delay 
+Delay30:loop Delay30
+ MOV AL,30H
+ OUT PORTA,AL 
+  MOV CX,00FFH; Delay 
+Delay31:loop Delay31 
+           
+ MOV AL,20H
+ OUT PORTA,AL 
+ RET
+FACWP ENDP
+
+CODE ENDS
+END
