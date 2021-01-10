@@ -28,8 +28,6 @@ sometext
 Running `cargo readme` will output the following:
 
 ~~~markdown
-
-
 # Half proc
 
 code
