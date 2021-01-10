@@ -98,6 +98,13 @@ Full:
   - low speed
   - midium speed 
   - high speed
+  
+  # to control the speed:
+
+# we used  3 buttons..
+ - the 1st btn makes the motor rotates with an normal speed
+ - the 2nd btn makes the motor rotates with an intermediate speed
+ - the 3rd btn makes the motor rotates with high speed
 
  #  1-FULL MODE مش هنكتب الجمله الكلام اللى جاى عند ال FULL MODE
  - The motor rotates a full revolution in 4 steps ,each step is a 90o  step angle , In this mode two coils are energized - logic 1 is given to two coils - at a time 
@@ -123,12 +130,7 @@ Full:
 
 # table
 
-# to control the speed:
-
-# we used  3 buttons..
- - the 1st btn makes the motor rotates with an normal speed
- - the 2nd btn makes the motor rotates with an intermediate speed
- - the 3rd btn makes the motor rotates with high speed 
+ 
 
 # the main components:
   - 8086 µp
