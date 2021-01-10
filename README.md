@@ -86,11 +86,8 @@ Full:
  
  
  # newwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
- # ream
-- this project explains how to control -5 leads unipolar- stepper motor using 8086 micro processor This project is programmed in assembly language, and designed using protous 8.6
- # ream
-
-* we start with controlling the mode of the motor:
+# this project explains how to control -5 leads unipolar- stepper motor using 8086 micro processor This project is programmed in assembly language, and designed using protous 8.6
+# we start with controlling the mode of the motor:
 # stepper motor works in 3 different modes ,we will cover only two of them :
   - full mode
   - half mode
