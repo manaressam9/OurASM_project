@@ -1,4 +1,4 @@
-# Stepper-Motor
+# Stepper-Motor :sparkle: twemoji-1f50c### Features
 1. [ Description. ](#desc)
 2. [ Usage tips. ](#usage)
 
