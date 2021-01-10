@@ -13,7 +13,7 @@ sometext
     
 
 <a name="usage"></a>
-## <div class="text-purple">  This text is purple </div>
+ <div class="text-blue">  This text is purple </div>
 
 
 
