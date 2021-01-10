@@ -2,8 +2,7 @@
 1. [ Description. ](#desc)
 2. [ Usage tips. ](#usage)
 
-<a name="desc"></a>
-## 1. Description
+c
 
 <?php
         echo "Hello world!";
@@ -46,7 +45,7 @@ fn sum2(n1: i32, n2: i32) -> i32 {
 
 License: MY_LICENSE
 ~~~
- * Red 
+ * [ Description. ](#desc) 
  + Green 
      * dark  green 
      * lime  
