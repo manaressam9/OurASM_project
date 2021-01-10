@@ -166,8 +166,8 @@ Full:
  - MODE PROC
    > Determine whice mode is choosed by user by:
    Get input from portc by logic gates (0 or 1 )
-   PC0 =1   go to full mode.
-   PC0 =0   go to half mode.
+   - PC0 =1   go to full mode.
+   - PC0 =0   go to half mode.
    Call in the start of code.
 - PRESS PROC
    > Check if user change mode,or direction ,or speed by:
@@ -180,14 +180,14 @@ Full:
    - This 4 procedures have code of every mode (steps that motor do).
      > Port A is get its value for every revolution from this procedure.
      Is Determined after call MODE PROC by check PC1. 
-     PC1 =0         go to clock wise 
-     PC1 =1         go to anti clock wise 
+    - PC1 =0         go to clock wise 
+    - PC1 =1         go to anti clock wise 
 
 - DELAY PROC
    > In our project ,we control speed by using different delays after every revolution.
    We have 3 speeds low , intermediate , high.
    Every speed has its own delay.
-   Delay low >> delay intermediate >> delay high
+    - Delay low >> delay intermediate >> delay high
    Is determined by check PC2 , PC3  , PC4
     - PC2  =1    speed is low.
     - PC3  =1    speed is intermediate.
