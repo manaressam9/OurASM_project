@@ -103,7 +103,7 @@ Full:
  - The motor rotates a full revolution in 4 steps ,each step is a 90o  step angle , In this mode two coils are energized - logic 1 is given to two coils - at a time 
 # This table shows the logic of programming stepper motor in full mode in clock wise direction where A,B,C and D are the coils of the motor.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top
-# TABLE
+
 
 | A | B | C | D |
 | ----- | ----- | ---- |
@@ -114,4 +114,28 @@ Full:
 | 1 | 1 | 0 | 0 |
 | --- | --- | --- |
 | 0 | 1 | 1 | 0 |
+
+# HALF MODE مش هنكتب الجمله الكلام اللى جاى عند ال HALF MODE
+ - The motor rotates a full revolution in 8 steps ,each step is a 45o  step angle  . 
+ - This mode works on the alternate energizing principle ,at one moment only 1 coil is energized, but in the very next moment 2 coils are energized, then again back to 1.       
+# This table shows the logic of programming stepper motor in full mode in clock wise.
+ - To rotate the motor in anti-clock wise just reverse the logic from bottom to top.
+
+
+# to control the speed:
+
+# we used  3 buttons..
+ - the 1st btn makes the motor rotates with an normal speed
+ - the 2nd btn makes the motor rotates with an intermediate speed
+ - the 3rd btn makes the motor rotates with high speed 
+
+# the main components:
+  - 8086 µp
+  - latch : 74HC373 
+  - I/O device : 8255A 
+  - motor driver:  ULN2003A 
+  - stepper motor
+  - battary 12V
+  - logicstates
+
 
