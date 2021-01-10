@@ -86,6 +86,7 @@ Full:
  
  
  # newwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+ #ream
 # this project explains how to control -5 leads unipolar- stepper motor using 8086 micro processor This project is programmed in assembly language, and designed using protous 8.6
 # we start with controlling the mode of the motor:
 # stepper motor works in 3 different modes ,we will cover only two of them :
@@ -106,11 +107,14 @@ Full:
  - the 2nd btn makes the motor rotates with an intermediate speed
  - the 3rd btn makes the motor rotates with high speed
 
+# ream
+
  #  1-FULL MODE مش هنكتب الجمله الكلام اللى جاى عند ال FULL MODE
+ # ream
  - The motor rotates a full revolution in 4 steps ,each step is a 90o  step angle , In this mode two coils are energized - logic 1 is given to two coils - at a time 
 # This table shows the logic of programming stepper motor in full mode in clock wise direction where A,B,C and D are the coils of the motor.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top
-
+# ream
 
 | A | B | C | D |
 | ----- | ----- | ---- |
@@ -123,37 +127,32 @@ Full:
 | 0 | 1 | 1 | 0 |
 
 # HALF MODE مش هنكتب الجمله الكلام اللى جاى عند ال HALF MODE
+# ream
  - The motor rotates a full revolution in 8 steps ,each step is a 45o  step angle  . 
  - This mode works on the alternate energizing principle ,at one moment only 1 coil is energized, but in the very next moment 2 coils are energized, then again back to 1.       
 # This table shows the logic of programming stepper motor in full mode in clock wise.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top.
-
+# ream
 # table
 
  
 
-# the main components:
-  - 8086 µp
-  - latch : 74HC373 
-  - I/O device : 8255A 
-  - motor driver:  ULN2003A 
-  - stepper motor
-  - battary 12V
-  - logicstates
 
+# salma
 # A brief description for the components:
 # image
- - The 8086 µp is only the CPU of our program -processes and  executes our assembly code- so it needs to be connected to a storage device and an I/O device.
- - here comes the rule of …
-      - 74HC373: is an octal D-type transparent latch , works as storage device, holds data through feedback lane
-      - Uln2003a: is a type of motor driver used to amplify the current produced by our circuit to suit the current needed by the stepper 
-      - 8255A: intel general purpose programmable  I/O device, used in 2 modes either i/o mode or BSR mode, in out project it’s used  in i/O mode.
-      > It has 3-ports are used as i/o ,(PortA,PortB,PortC).
-      > PORTC is consist of PC Lower, PC Upper
-      > There are different modes ,we use mode 0
-      > So,let D6=0 , D5=0 ,D2=0
-      > To use as i/o mode ,let D7=1
-
+   - 74HC373: 
+    - is an octal D-type transparent latch , works as storage device, holds data through feedback lane
+   - Uln2003a:
+    - is a type of motor driver used to amplify the current produced by our circuit to suit the current needed by the stepper 
+   - 8255A: 
+    - intel general purpose programmable  I/O device, used in 2 modes either i/o mode or BSR mode, in out project it’s used  in i/O mode.
+      - It has 3-ports are used as i/o ,(PortA,PortB,PortC).
+      - PORTC is consist of PC Lower, PC Upper
+      - There are different modes ,we use mode 0
+      - So,let D6=0 , D5=0 ,D2=0
+      - To use as i/o mode ,let D7=1
+# salma
 # table
 
 - Control register (CR)= D7 D6 D5 D4 D3 D2 D1D0
@@ -163,6 +162,9 @@ Full:
    - PORTC I/P
 - So,CR=10000001
       
+      
+      
+# done by me      
 #  a description of our code   code مش هنكتب الجمله الكلام اللى جاى عند ال 
 # we have in our code 11 Procedures.
  - MODE PROC
