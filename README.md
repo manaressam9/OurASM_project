@@ -104,13 +104,13 @@ Full:
 # This table shows the logic of programming stepper motor in full mode in clock wise direction where A,B,C and D are the coils of the motor.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top
 
-|A|B|C|D|
-|---|---|---|
-|0|0|1|1|
-|---|---|---|
-|1|0|0|1|
-|---|---|---|
-|1|1|0|0|
-|---|---|---|
-|0|1|1|0|
-|---|---|---|
+| A | B | C | D |
+| --- | --- | --- |
+| 0 | 0 | 1 | 1 |
+| --- | --- | --- |
+| 1 | 0 | 0 | 1 |
+| --- | --- | --- |
+| 1 | 1 | 0 | 0 |
+| --- | --- | --- |
+| 0 | 1 | 1 | 0 |
+
