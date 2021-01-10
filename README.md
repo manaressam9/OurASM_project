@@ -156,8 +156,8 @@ Full:
 
 - Control register (CR)= D7 D6 D5 D4 D3 D2 D1D0
 - In our code use :
-- portA o/p
-- PORTB not using
-- PORTC I/P
+   - portA o/p
+   - PORTB not using
+   - PORTC I/P
 - So,CR=10000001
       
