@@ -13,7 +13,7 @@ sometext
     
 
 <a name="usage"></a>
- <div class="text-blue">  This text is purple </div>
+## <div class="text-purple">  This text is purple </div>
 
 
 
@@ -109,14 +109,14 @@ Full:
  - the 2nd btn makes the motor rotates with an intermediate speed
  - the 3rd btn makes the motor rotates with high speed
 
-# ream
+# salma
 
  #  1-FULL MODE مش هنكتب الجمله الكلام اللى جاى عند ال FULL MODE
  # ream
  - The motor rotates a full revolution in 4 steps ,each step is a 90o  step angle , In this mode two coils are energized - logic 1 is given to two coils - at a time 
 # This table shows the logic of programming stepper motor in full mode in clock wise direction where A,B,C and D are the coils of the motor.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top
-# ream
+# salma
 
 | A | B | C | D |
 | ----- | ----- | ---- |
@@ -129,12 +129,12 @@ Full:
 | 0 | 1 | 1 | 0 |
 
 # HALF MODE مش هنكتب الجمله الكلام اللى جاى عند ال HALF MODE
-# ream
+# salma
  - The motor rotates a full revolution in 8 steps ,each step is a 45o  step angle  . 
  - This mode works on the alternate energizing principle ,at one moment only 1 coil is energized, but in the very next moment 2 coils are energized, then again back to 1.       
 # This table shows the logic of programming stepper motor in full mode in clock wise.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top.
-# ream
+# salma
 # table
 
  
