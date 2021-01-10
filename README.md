@@ -13,7 +13,9 @@ sometext
     
 
 <a name="usage"></a>
-## 2. Usage tips
+## <div class="text-purple">  This text is purple </div>
+
+
 
 sometext
 
