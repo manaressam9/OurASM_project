@@ -26,3 +26,24 @@ sometext
 > Here's some example code:
 > 
 >     return shell_exec("echo $input | $markdown_script");
+Running `cargo readme` will output the following:
+
+~~~markdown
+[![Build Status](__badge_image__)](__badge_url__)
+
+# my_crate
+
+This is my awesome crate
+
+Here goes some other description of what it is and what is does
+
+## Examples
+```rust
+fn sum2(n1: i32, n2: i32) -> i32 {
+  n1 + n2
+}
+```
+
+License: MY_LICENSE
+~~~
+
