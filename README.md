@@ -121,6 +121,7 @@ Full:
 # This table shows the logic of programming stepper motor in full mode in clock wise.
  - To rotate the motor in anti-clock wise just reverse the logic from bottom to top.
 
+# table
 
 # to control the speed:
 
@@ -138,4 +139,17 @@ Full:
   - battary 12V
   - logicstates
 
+# A brief description for the components:
+# image
+ - The 8086 µp is only the CPU of our program -processes and  executes our assembly code- so it needs to be connected to a storage device and an I/O device.
+ - here comes the rule of …
+      - 1.	74HC373: is an octal D-type transparent latch , works as storage device, holds data through feedback lane
+      - 2.	 8255A: intel general purpose programmable  I/O device, used in 2 modes either i/o mode or BSR mode, in out project it’s used  in i/O mode.
+            - It has 3-ports are used as i/o ,(PortA,PortB,PortC).
+            - PORTC is consist of PC Lower, PC Upper
+            - There are different modes ,we use mode 0
+                 So,let D6=0 , D5=0 ,D2=0
+            - To use as i/o mode : let D7=1
+
+# table
 
