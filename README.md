@@ -28,7 +28,7 @@ sometext
 Running `cargo readme` will output the following:
 
 ~~~markdown
-[![Build Status](__badge_image__)](__badge_url__)
+
 
 # my_crate
 
