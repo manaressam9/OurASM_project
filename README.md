@@ -144,8 +144,9 @@ Full:
  - The 8086 µp is only the CPU of our program -processes and  executes our assembly code- so it needs to be connected to a storage device and an I/O device.
  - here comes the rule of …
       - 74HC373: is an octal D-type transparent latch , works as storage device, holds data through feedback lane
+      - Uln2003a: is a type of motor driver used to amplify the current produced by our circuit to suit the current needed by the stepper 
       - 8255A: intel general purpose programmable  I/O device, used in 2 modes either i/o mode or BSR mode, in out project it’s used  in i/O mode.
-     > It has 3-ports are used as i/o ,(PortA,PortB,PortC).
+      > It has 3-ports are used as i/o ,(PortA,PortB,PortC).
       > PORTC is consist of PC Lower, PC Upper
       > There are different modes ,we use mode 0
       > So,let D6=0 , D5=0 ,D2=0
@@ -153,3 +154,10 @@ Full:
 
 # table
 
+- Control register (CR)= D7 D6 D5 D4 D3 D2 D1D0
+- In our code use :
+- portA o/p
+- PORTB not using
+- PORTC I/P
+- So,CR=10000001
+      
