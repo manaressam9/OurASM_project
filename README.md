@@ -11,3 +11,6 @@ sometext
 ## 2. Usage tips
 
 sometext
+<?php
+        echo "Hello world!";
+    ?>
